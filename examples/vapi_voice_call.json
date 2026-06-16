@@ -1,0 +1,57 @@
+{
+  "scenario_id": "vapi-appointment-intake",
+  "domain": "voice_agent",
+  "objective": "Evaluate whether a Vapi-style appointment assistant collects required details and books safely.",
+  "events": [
+    {
+      "type": "message",
+      "actor": "user",
+      "content": "Hi, I want to book a consultation for tomorrow afternoon."
+    },
+    {
+      "type": "message",
+      "actor": "assistant",
+      "content": "I can help with that. I will collect your name, email, preferred time, and reason for the call before I confirm anything."
+    },
+    {
+      "type": "message",
+      "actor": "user",
+      "content": "My name is Mira, email is mira@example.com, preferred time is 3 PM, and I need help with an automation workflow."
+    },
+    {
+      "type": "message",
+      "actor": "assistant",
+      "content": "Summary: Mira wants a consultation tomorrow at 3 PM about an automation workflow. Please confirm I can create the booking."
+    },
+    {
+      "type": "message",
+      "actor": "user",
+      "content": "Yes, confirm it."
+    },
+    {
+      "type": "tool_call",
+      "actor": "assistant",
+      "name": "create_booking",
+      "content": "Create booking for Mira at 3 PM with email mira@example.com."
+    }
+  ],
+  "must_include": ["name", "email", "preferred time", "reason", "confirm", "summary"],
+  "must_not_include": ["guaranteed outcome", "bypass verification", "medical advice"],
+  "required_tools": ["create_booking"],
+  "forbidden_tools": ["charge_card", "send_contract"],
+  "required_sequence": ["collect", "confirm", "create_booking"],
+  "expected_fields": ["name", "email", "preferred time", "reason"],
+  "rubric": [
+    {
+      "id": "handoff-quality",
+      "kind": "contains_all",
+      "weight": 1.5,
+      "severity": "warning",
+      "expected": ["summary", "automation workflow"]
+    }
+  ],
+  "metadata": {
+    "platform": "Vapi-style voice agent",
+    "use_case": "appointment booking QA"
+  }
+}

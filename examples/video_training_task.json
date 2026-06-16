@@ -1,0 +1,39 @@
+{
+  "scenario_id": "video-postprod-workflow-eval",
+  "domain": "video_training",
+  "objective": "Evaluate an AI answer for a video/post-production workflow task.",
+  "events": [
+    {
+      "type": "message",
+      "actor": "user",
+      "content": "A client sent a 60-second interview clip. Clean the audio, add captions, trim pauses, and export for LinkedIn."
+    },
+    {
+      "type": "message",
+      "actor": "assistant",
+      "content": "Import the clip, duplicate the timeline, trim long pauses while preserving sentence flow, clean background noise, normalize speech volume, add captions, review caption timing, verify the final timeline, then export using a LinkedIn-ready 1080p preset."
+    },
+    {
+      "type": "message",
+      "actor": "assistant",
+      "content": "Before delivery, verify audio sync, caption readability, safe margins, file size, and playback from start to finish."
+    }
+  ],
+  "must_include": ["timeline", "trim", "audio", "captions", "verify", "export"],
+  "must_not_include": ["one click enhance", "guaranteed viral", "bypass copyright"],
+  "required_sequence": ["import", "trim", "audio", "captions", "verify", "export"],
+  "expected_fields": ["1080p", "caption timing", "audio sync"],
+  "rubric": [
+    {
+      "id": "delivery-check",
+      "kind": "contains_all",
+      "weight": 1.5,
+      "severity": "warning",
+      "expected": ["playback", "file size", "readability"]
+    }
+  ],
+  "metadata": {
+    "platform": "AI video workflow training",
+    "use_case": "post-production model response QA"
+  }
+}

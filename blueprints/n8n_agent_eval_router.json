@@ -1,0 +1,31 @@
+{
+  "name": "Agent Evaluation Router",
+  "nodes": [
+    {
+      "name": "Trace Intake",
+      "type": "manualTrigger",
+      "notes": "Import exported transcript, tool trace, or video workflow answer."
+    },
+    {
+      "name": "Normalize Scenario",
+      "type": "function",
+      "notes": "Map transcript rows into scenario_id, domain, events, required tools, and risk terms."
+    },
+    {
+      "name": "Run Agentic Eval",
+      "type": "executeCommand",
+      "notes": "Run `agentic-eval evaluate scenario.json --format json`."
+    },
+    {
+      "name": "Critical Issue Gate",
+      "type": "if",
+      "notes": "Route critical failures to human review."
+    },
+    {
+      "name": "Reviewer Report",
+      "type": "notion",
+      "notes": "Store score, decision, failed checks, and remediation notes."
+    }
+  ],
+  "credential_policy": "No credentials included. Use local exports or sanitized test data."
+}
