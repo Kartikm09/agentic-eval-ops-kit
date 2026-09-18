@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic workflow evidence v1",
+  "type": "object",
+  "required": ["schema_version", "classification", "job_id", "tenant", "state", "attempts", "error", "action", "action_digest", "effects", "trace", "token_usage", "cost", "provider_integration"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "classification": {"const": "synthetic"},
+    "job_id": {"type": "string", "format": "uuid"},
+    "tenant": {"type": "string"},
+    "state": {"enum": ["requested", "context_retrieved", "proposed", "validated", "awaiting_approval", "approved", "executed", "completed", "failed"]},
+    "attempts": {"type": "integer", "minimum": 0},
+    "error": {"type": ["string", "null"]},
+    "action": {"anyOf": [{"$ref": "action.schema.json"}, {"type": "null"}]},
+    "action_digest": {"type": ["string", "null"]},
+    "effects": {"type": "array", "maxItems": 1},
+    "trace": {"type": "array"},
+    "token_usage": {"type": "null"},
+    "cost": {"type": "null"},
+    "provider_integration": {"const": "not implemented"}
+  }
+}

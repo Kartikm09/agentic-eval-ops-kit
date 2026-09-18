@@ -138,3 +138,19 @@ Use this repo as proof for:
 ## Safety Boundary
 
 The examples are synthetic. Do not paste private calls, production transcripts, API keys, personal data, or confidential client prompts into public test files.
+
+## Durable synthetic case workflow
+
+A separate SQLite runner now processes requests through versioned tenant context,
+action proposal, validation, exact-action approval, local sandbox execution and
+an evidence report. It tests bounded retries, deadlines, duplicate suppression,
+concurrent replay and recovery after process termination.
+
+```bash
+python3 scripts/verify.py
+PYTHONPATH=src python3 -m agentic_eval_ops.workflow_demo --report /tmp/workflow-report.json
+```
+
+See [the workflow contract and limitations](docs/DURABLE_WORKFLOW.md). The demo
+uses no provider, paid model, external booking or live company data. Token usage
+and cost remain unknown. Existing commands and MIT licensing are preserved.
