@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Provider independent synthetic action v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "tenant", "case_id", "body", "source", "memory_version"],
+  "properties": {
+    "kind": {"const": "case_note"},
+    "tenant": {"type": "string", "minLength": 1, "maxLength": 100},
+    "case_id": {"type": "string", "minLength": 1, "maxLength": 100},
+    "body": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "source": {"type": "string", "minLength": 1, "maxLength": 500},
+    "memory_version": {"type": "integer", "minimum": 1}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic case request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_key", "case_id", "memory_key", "memory_version", "requires_approval"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_key": {"type": "string", "minLength": 1, "maxLength": 100},
+    "case_id": {"type": "string", "minLength": 1, "maxLength": 100},
+    "memory_key": {"type": "string", "minLength": 1, "maxLength": 100},
+    "memory_version": {"type": "integer", "minimum": 1},
+    "requires_approval": {"type": "boolean"},
+    "timeout": {"type": "number", "exclusiveMinimum": 0, "maximum": 86400, "default": 300},
+    "max_attempts": {"type": "integer", "minimum": 1, "maximum": 10, "default": 3}
+  }
+}

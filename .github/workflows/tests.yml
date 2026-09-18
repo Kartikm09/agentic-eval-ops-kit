@@ -21,3 +21,6 @@ jobs:
 
       - name: Run sample batch
         run: PYTHONPATH=src python -m agentic_eval_ops.cli batch examples --format text
+
+      - name: Run durable synthetic workflow
+        run: PYTHONPATH=src python -m agentic_eval_ops.workflow_demo
